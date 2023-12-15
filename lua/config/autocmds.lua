@@ -2,6 +2,18 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- Color
+--vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#401010]])
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.rs",
+  callback = function()
+    vim.api.nvim_set_hl(0, "RustTypeHint", {
+      fg = "#000000",
+      bg = "#406060", --#80c0c0
+    })
+  end,
+})
+
 -- Filetype
 local filetype_pattern_pairs = {
   { "t32", "*.cmm" },

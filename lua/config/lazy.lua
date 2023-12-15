@@ -55,3 +55,8 @@ require("colorizer").setup({
     cmp_docs = { always_update = true },
   },
 })
+
+require("crates").setup()
+require("rust-tools").setup({
+  tools = { inlay_hints = { highlight = "RustTypeHint" } },
+})
