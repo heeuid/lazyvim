@@ -3,7 +3,6 @@
 -- Add any additional autocmds here
 
 -- Color
---vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#401010]])
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*.rs",
   callback = function()

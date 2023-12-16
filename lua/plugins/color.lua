@@ -13,10 +13,12 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
-    opts = {
-      style = "night",
-    },
+    opts = { style = "night" },
+    config = function()
+      vim.o.background = "dark"
+      vim.cmd("colorscheme tokyonight-night")
+    end,
   },
 }
