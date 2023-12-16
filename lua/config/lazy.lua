@@ -44,19 +44,3 @@ require("lazy").setup({
     },
   },
 })
-
-------------------------------------------------------
--- Settings which will be loaded after 'lazy' setup --
-------------------------------------------------------
-
-require("colorizer").setup({
-  filetypes = {
-    "*", -- Highlight all files, but customize some others.
-    cmp_docs = { always_update = true },
-  },
-})
-
-require("crates").setup()
-require("rust-tools").setup({
-  tools = { inlay_hints = { highlight = "RustTypeHint" } },
-})
