@@ -1,7 +1,7 @@
 return {
   {
     "NvChad/nvim-colorizer.lua",
-    lazy = false,
+    lazy = true,
     config = function()
       require("colorizer").setup({
         filetypes = {
@@ -19,6 +19,18 @@ return {
     config = function()
       vim.o.background = "dark"
       vim.cmd("colorscheme tokyonight-night")
+    end,
+  },
+  {
+    "mrjones2014/nvim-ts-rainbow",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
+      })
     end,
   },
 }
