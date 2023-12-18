@@ -21,7 +21,7 @@ for _, elem in pairs(filetype_pattern_pairs) do
   local filetype = elem[1]
   local pattern = elem[2]
   --vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  vim.api.nvim_create_autocmd("BufEnter", {
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufRead" }, {
     pattern = pattern,
     callback = function()
       vim.bo.filetype = filetype
