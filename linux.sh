@@ -8,7 +8,7 @@ if [ $# -gt 0 ]; then
 fi
 
 if [ "$option" = "install" ]; then
-	$ok=1
+	ok=1
 
 	# required
 	mv ~/.config/nvim{,.bak}
