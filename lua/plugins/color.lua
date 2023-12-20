@@ -12,14 +12,11 @@ return {
     end,
   },
   {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 1000,
-    opts = { style = "night" },
-    config = function()
-      vim.o.background = "dark"
-      vim.cmd("colorscheme tokyonight-night")
-    end,
+    "LazyVim/LazyVim",
+    dependencies = {
+      "projekt0n/github-nvim-theme",
+    },
+    opts = { colorscheme = "github_dark" },
   },
   {
     "mrjones2014/nvim-ts-rainbow",
