@@ -12,6 +12,7 @@ return {
         "bash-language-server",
         "lemminx",
         "taplo",
+        "codelldb", -- for c, c++, rust debugging (llvm)
         --"shfmt",
         --"clangd",
         --"pyright",
