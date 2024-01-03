@@ -16,8 +16,7 @@ local cscope_sym_map = {
   c = "Find functions calling this function",
   t = "Find this text string",
   e = "Find this egrep pattern",
-  f = "Find this file",
-  i = "Find files #including this file",
+  f = "Find this file", i = "Find files #including this file",
   d = "Find functions called by this function",
   a = "Find places where this symbol is assigned a value",
   b = "Build database",
@@ -29,13 +28,8 @@ local get_cscope_prompt_cmd = function(operation, selection)
   end
 
   return function()
-    require("cscope_maps").cscope_prompt(operation, vim.fn.expand("<" + sel + ">"))
+    require("cscope_maps").cscope_prompt(operation, vim.fn.expand("<" .. sel .. ">"))
   end
-  -- return string.format(
-  -- 	[[<cmd>lua require('cscope_maps').cscope_prompt('%s', vim.fn.expand("<%s>"))<cr>]],
-  -- 	operation,
-  -- 	sel
-  -- )
 end
 local cscope_cmd_opt = function(operation, selection)
   local ret = {
@@ -69,7 +63,7 @@ if ok then
       b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
       n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
       W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
-      w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
+      w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
       e = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
@@ -154,7 +148,7 @@ if ok then
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       W = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-      f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
+      f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>Mason<cr>", "Mason Info" },
       n = {
