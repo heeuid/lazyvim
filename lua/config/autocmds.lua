@@ -32,7 +32,7 @@ end
 -- Indentation
 local event_indent_pairs = {
   { { "FileType" }, { "c", "make" }, 8, false },
-  { { "FileType" }, { "lua" }, 2, true },
+  { { "FileType" }, { "lua", "dart" }, 2, true },
   {
     { "BufRead", "BufNewFile" },
     { "*.dts", "*.dtsi", "Kconfig*", "*_defconfig" },
@@ -54,3 +54,9 @@ for _, elem in pairs(event_indent_pairs) do
     end,
   })
 end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    require("lazy.core.config").options.checker.notify = false
+  end
+})
