@@ -23,17 +23,4 @@ return {
     opts = { colorscheme = "github_dark" },
     --opts = { colorscheme = "tokyonight-night" },
   },
-  {
-    "HiPhish/nvim-ts-rainbow2",
-    config = function()
-      require'nvim-treesitter.configs'.setup {
-        rainbow = {
-          enable = true,
-          -- disable = { 'c', 'cpp' },
-          query = 'rainbow-parens',
-          strategy = require'ts-rainbow'.strategy.global,
-        }
-      }
-    end
-  },
 }
