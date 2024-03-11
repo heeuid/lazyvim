@@ -49,13 +49,23 @@ local function change_indent(n)
   end
 end
 
+
 local ok, wk = pcall(require, "which-key")
 if ok then
   wk.register({
+    Q = { "<cmd>q<cr>", "Quit window (:q)" },
+  })
+  wk.register({
     a = { "<cmd>wa<cr>", "Save All(:wa)" },
     z = { "<cmd>w<cr>", "Save(:w)" },
+    p = {
+      name = "copy",
+      p = {"<cmd>CopyPath<cr>", "CopyPath"},
+      a = {"<cmd>CopyAbsPath<cr>", "CopyAbsPath"},
+      r = {"<cmd>CopyRelPath<cr>", "CopyRelPath"},
+    }
   }, { prefix = "<leader>" })
-  wk.register({
+  wk.register({ -- <localleader>
     b = {
       name = "buffers",
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
