@@ -1,12 +1,13 @@
+local ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
 return {
   {
     "dhananjaylatkar/cscope_maps.nvim",
-    ft = { "c", "cpp" },
+    ft = ft,
     dependencies = {
-      "folke/which-key.nvim",                -- optional [for whichkey hints]
-      "nvim-telescope/telescope.nvim",       -- optional [for picker="telescope"]
-      "ibhagwan/fzf-lua",                    -- optional [for picker="fzf-lua"]
-      "nvim-tree/nvim-web-devicons",         -- optional [for devicons in telescope or fzf]
+      "folke/which-key.nvim",          -- optional [for whichkey hints]
+      "nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+      "ibhagwan/fzf-lua",              -- optional [for picker="fzf-lua"]
+      "nvim-tree/nvim-web-devicons",   -- optional [for devicons in telescope or fzf]
     },
     opts = {
       disable_maps = true,
@@ -32,10 +33,10 @@ return {
   {
     "p00f/clangd_extensions.nvim",
     lazy = true,
-    ft = { "c", "cpp" },
+    ft = ft,
     keys = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "c", "cpp" },
+        pattern = ft,
         callback = function()
           local ok, wk = pcall(require, "which-key")
           if ok then
