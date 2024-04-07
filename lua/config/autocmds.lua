@@ -31,11 +31,11 @@ end
 
 -- Indentation
 local event_indent_pairs = {
-  { { "FileType" }, { "c", "make" }, 8, false },
+  { { "FileType" }, { "c", "make" },   8, false },
   { { "FileType" }, { "lua", "dart" }, 2, true },
   {
     { "BufRead", "BufNewFile" },
-    { "*.dts", "*.dtsi", "Kconfig*", "*_defconfig" },
+    { "*.dts",   "*.dtsi",    "Kconfig*", "*_defconfig" },
     8,
     false,
   },
@@ -100,3 +100,74 @@ vim.api.nvim_create_user_command('CopyPath', function()
   require("notify").dismiss({ silent = true, pending = true })
   vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
+
+-- add chars at the ends of selected lines
+local add_chars = function(dir)
+  local mode = vim.api.nvim_get_mode().mode
+  if mode ~= 'v' and mode ~= 'V' and mode ~= '\x16' then
+    vim.print("Only for visual mode; now is ...", mode)
+    return
+  end
+
+  -- 사용자에게 앞뒤에 추가할 문자를 입력받음
+  local prepend_text
+  local append_text
+  if not dir or dir == 'left' or dir == 'both' or dir == 'one-line' then
+    prepend_text = vim.fn.input('각 라인 첫 문자 변경: ')
+  else
+    prepend_text = ''
+  end
+  if not dir or dir == 'right' or dir == 'both' or dir == 'one-line' then
+    append_text = vim.fn.input('각 라인 마지막 문자 변경: ')
+  else
+    append_text = ''
+  end
+
+  -- 현재 선택 영역의 정보를 가져옴
+  vim.cmd([[execute "normal! \<ESC>"]])
+  local _, start_line, start_col, _ = unpack(vim.fn.getpos("'<"))
+  local _, end_line, end_col, _ = unpack(vim.fn.getpos("'>"))
+
+  -- 선택 영역의 텍스트를 가져옴
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  if dir == 'one-line' then
+    if #lines == 1 then -- 한 줄만 선택된 경우
+      lines[1] = lines[1]:sub(1, start_col - 1) ..
+      prepend_text .. lines[1]:sub(start_col, end_col) .. append_text .. lines[1]:sub(end_col + 1)
+    else
+      -- 여러 줄 선택된 경우, 첫 줄과 마지막 줄에만 문자 추가
+      lines[1] = lines[1]:sub(1, start_col - 1) .. prepend_text .. lines[1]:sub(start_col)
+      lines[#lines] = lines[#lines]:sub(1, end_col) .. append_text .. lines[#lines]:sub(end_col + 1)
+    end
+  else
+    for i, line in ipairs(lines) do
+      if #line > 0 then -- 라인이 비어있지 않은 경우에만 작업 수행
+        local new_line = line:sub(1, start_col - 1) ..
+        prepend_text .. line:sub(start_col, end_col) .. append_text .. line:sub(end_col + 1)
+        lines[i] = new_line
+      end
+    end
+  end
+
+  -- 수정된 텍스트로 선택 영역을 대체
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, lines)
+end
+
+vim.api.nvim_create_user_command('AddCharsOne', function()
+  add_chars('one-line')
+end, {})
+vim.api.nvim_create_user_command('AddCharsAll', function()
+  add_chars()
+end, {})
+vim.api.nvim_create_user_command('AddCharsLeftAll', function()
+  add_chars('left')
+end, {})
+vim.api.nvim_create_user_command('AddCharsRightAll', function()
+  add_chars('right')
+end, {})
+
+vim.api.nvim_set_keymap('v', '<leader>ac', "<cmd>AddCharsOne<cr>", { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>aa', "<cmd>AddCharsAll<cr>", { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>al', "<cmd>AddCharsLeftAll<cr>", { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>ar', "<cmd>AddCharsRightAll<cr>", { noremap = true })
