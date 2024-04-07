@@ -16,13 +16,14 @@ local cscope_sym_map = {
   c = "Find functions calling this function",
   t = "Find this text string",
   e = "Find this egrep pattern",
-  f = "Find this file", i = "Find files #including this file",
+  f = "Find this file",
+  i = "Find files #including this file",
   d = "Find functions called by this function",
   a = "Find places where this symbol is assigned a value",
   b = "Build database",
 }
 local get_cscope_prompt_cmd = function(operation, selection)
-  local sel = "cword" -- word under cursor
+  local sel = "cword"      -- word under cursor
   if selection == "f" then -- file under cursor
     sel = "cfile"
   end
@@ -49,9 +50,12 @@ local function change_indent(n)
   end
 end
 
+vim.api.nvim_set_keymap("c", "<c-b>", "<Left>", {})
+vim.api.nvim_set_keymap("c", "<c-f>", "<Right>", {})
 
 local ok, wk = pcall(require, "which-key")
 if ok then
+  -- normal mode
   wk.register({
     Q = { "<cmd>q<cr>", "Quit window (:q)" },
   })
@@ -60,9 +64,9 @@ if ok then
     z = { "<cmd>w<cr>", "Save(:w)" },
     p = {
       name = "copy",
-      p = {"<cmd>CopyPath<cr>", "CopyPath"},
-      a = {"<cmd>CopyAbsPath<cr>", "CopyAbsPath"},
-      r = {"<cmd>CopyRelPath<cr>", "CopyRelPath"},
+      p = { "<cmd>CopyPath<cr>", "CopyPath" },
+      a = { "<cmd>CopyAbsPath<cr>", "CopyAbsPath" },
+      r = { "<cmd>CopyRelPath<cr>", "CopyRelPath" },
     }
   }, { prefix = "<leader>" })
   wk.register({ -- <localleader>
