@@ -53,6 +53,11 @@ end
 vim.api.nvim_set_keymap("c", "<c-b>", "<Left>", {})
 vim.api.nvim_set_keymap("c", "<c-f>", "<Right>", {})
 
+vim.api.nvim_set_keymap("i", "<c-h>", "<Left>", {})
+vim.api.nvim_set_keymap("i", "<c-l>", "<Right>", {})
+vim.api.nvim_set_keymap("i", "<c-a>", "<Up>", {})
+vim.api.nvim_set_keymap("i", "<c-d>", "<Down>", {})
+
 local ok, wk = pcall(require, "which-key")
 if ok then
   -- normal mode
