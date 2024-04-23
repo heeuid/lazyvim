@@ -8,4 +8,6 @@ vim.opt.expandtab = true
 vim.opt.swapfile = false
 vim.opt.autoread = true
 vim.opt.undofile = true
+vim.opt.colorcolumn = "80"
+
 vim.g.autoformat = false
