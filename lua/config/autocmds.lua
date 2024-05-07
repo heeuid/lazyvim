@@ -133,19 +133,31 @@ local add_chars = function(dir)
 
   if dir == 'one-line' then
     if #lines == 1 then -- 한 줄만 선택된 경우
-      lines[1] = lines[1]:sub(1, start_col - 1) ..
-      prepend_text .. lines[1]:sub(start_col, end_col) .. append_text .. lines[1]:sub(end_col + 1)
+      local temp = lines[1]:sub(end_col + 1)
+      lines[1] = lines[1]:sub(1, start_col - 1) .. prepend_text .. lines[1]:sub(start_col, end_col) .. append_text
+      if end_col ~= vim.v.maxcol then
+        lines[1] = lines[1] .. temp
+      end
     else
       -- 여러 줄 선택된 경우, 첫 줄과 마지막 줄에만 문자 추가
       lines[1] = lines[1]:sub(1, start_col - 1) .. prepend_text .. lines[1]:sub(start_col)
-      lines[#lines] = lines[#lines]:sub(1, end_col) .. append_text .. lines[#lines]:sub(end_col + 1)
+      local temp = lines[#lines]:sub(end_col + 1)
+      lines[#lines] = lines[#lines]:sub(1, end_col) .. append_text
+      if end_col ~= vim.v.maxcol then
+        lines[#lines] = lines[#lines] .. temp
+      end
     end
   else
     for i, line in ipairs(lines) do
       if #line > 0 then -- 라인이 비어있지 않은 경우에만 작업 수행
+        local temp = line:sub(end_col + 1)
         local new_line = line:sub(1, start_col - 1) ..
-        prepend_text .. line:sub(start_col, end_col) .. append_text .. line:sub(end_col + 1)
-        lines[i] = new_line
+            prepend_text .. line:sub(start_col, end_col) .. append_text
+        if end_col ~= vim.v.maxcol then
+          lines[i] = new_line .. temp
+        else
+          lines[i] = new_line
+        end
       end
     end
   end
@@ -167,7 +179,10 @@ vim.api.nvim_create_user_command('AddCharsRightAll', function()
   add_chars('right')
 end, {})
 
-vim.api.nvim_set_keymap('v', '<leader>ac', "<cmd>AddCharsOne<cr>", { noremap = true })
-vim.api.nvim_set_keymap('v', '<leader>aa', "<cmd>AddCharsAll<cr>", { noremap = true })
-vim.api.nvim_set_keymap('v', '<leader>al', "<cmd>AddCharsLeftAll<cr>", { noremap = true })
-vim.api.nvim_set_keymap('v', '<leader>ar', "<cmd>AddCharsRightAll<cr>", { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>ac', "<cmd>AddCharsOne<cr>", { noremap = true, desc = "add chars to both ends" })
+vim.api.nvim_set_keymap('v', '<leader>aa', "<cmd>AddCharsAll<cr>",
+  { noremap = true, desc = "add chars to both ends for each line" })
+vim.api.nvim_set_keymap('v', '<leader>ah', "<cmd>AddCharsLeftAll<cr>",
+  { noremap = true, desc = "add chars to left end for each line" })
+vim.api.nvim_set_keymap('v', '<leader>al', "<cmd>AddCharsRightAll<cr>",
+  { noremap = true, desc = "addr chars to right end for each line" })
