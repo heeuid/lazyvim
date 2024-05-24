@@ -15,13 +15,6 @@ return {
   {
     "simrat39/rust-tools.nvim",
     ft = { "rust" },
-    opts = {
-      tools = {
-        inlay_hints = {
-          highlight = "RustTypeHint",
-        },
-      },
-    },
     config = function()
       local mason_registry = require("mason-registry")
       local dap = require("dap")

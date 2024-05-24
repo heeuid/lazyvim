@@ -1,4 +1,4 @@
-local version = vim.inspect(vim.version())
+local version = vim.version()
 local current_v = { version["major"], version["minor"], version["patch"] }
 local target_v = { 0, 10, 0 }
 local enabled = false
@@ -24,5 +24,39 @@ return {
         }
       }
     },
+  },
+  {
+    "MysticalDevil/inlay-hints.nvim",
+    event = "LspAttach",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("inlay-hints").setup()
+
+      -- lua_ls
+      nvim_lsp.lua_ls.setup({
+        settings = {
+          Lua = {
+            hint = {
+              enable = true, -- necessary
+            }
+          }
+        }
+      })
+
+      -- clangd
+      nvim_lsp.clangd.setup({
+        settings = {
+          clangd = {
+            InlayHints = {
+              Designators = true,
+              Enabled = true,
+              ParameterNames = true,
+              DeducedTypes = true,
+            },
+            fallbackFlags = { "-std=c++20" },
+          },
+        }
+      })
+    end
   },
 }

@@ -203,6 +203,7 @@ if ok then
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
         s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
       },
+      h = { "<cmd>InlayHintsToggle<cr>", "Toggle Inlay Hints" },
       v = {
         "<cmd>Vista nvim_lsp<cr>",
         "view code map (like tagbar; 'Vista nvim_lsp')"
