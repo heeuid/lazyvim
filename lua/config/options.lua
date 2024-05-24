@@ -11,3 +11,4 @@ vim.opt.undofile = true
 vim.opt.colorcolumn = "80"
 
 vim.g.autoformat = false
+vim.g.lazyvim_python_lsp = "basedpyright"

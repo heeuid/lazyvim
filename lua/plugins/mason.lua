@@ -15,7 +15,7 @@ return {
         "codelldb", -- for c, c++, rust debugging (llvm)
         --"shfmt",
         --"clangd",
-        --"pyright",
+        --"basedpyright",
         --"rust-analyzer",
         --"stylua",
         --"yaml-language-server",
