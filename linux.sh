@@ -22,7 +22,7 @@ if [ "$option" = "install" ]; then
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 	# Remove the .git folder, so you can add it to your own repo later
-	rm -rf ~/.config/nvim/.git ~/.config/nvim/.gitignore
+	rm -rf ~/.config/nvim/.git ~/.config/nvim/.gitignore ~/.config/nvim/lua
 
 	# Copy my lazyvim settings
 	cp -r ./lua ~/.config/nvim
