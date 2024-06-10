@@ -80,7 +80,7 @@ if ok then
     }
   }, n_leader)
 
-  local n_localleader = { mode = "n", prefix = "<localleader" }
+  local n_localleader = { mode = "n", prefix = "<localleader>" }
   wk.register({ -- <localleader>
     b = {
       name = "buffers",
