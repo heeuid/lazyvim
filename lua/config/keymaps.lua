@@ -61,9 +61,14 @@ vim.api.nvim_set_keymap("i", "<c-d>", "<Down>", {})
 local ok, wk = pcall(require, "which-key")
 if ok then
   -- normal mode
+  local n_ = { mode = "n", prefix = "" }
   wk.register({
+    U = { "<C-R>", "Redo" },
     Q = { "<cmd>q<cr>", "Quit window (:q)" },
-  })
+    ["<C-Q>"] = { "<cmd>q!<cr>", "Quit window" },
+  }, n_)
+
+  local n_leader = { mode = "n", prefix = "<leader>" }
   wk.register({
     a = { "<cmd>wa<cr>", "Save All(:wa)" },
     z = { "<cmd>w<cr>", "Save(:w)" },
@@ -73,7 +78,9 @@ if ok then
       a = { "<cmd>CopyAbsPath<cr>", "CopyAbsPath" },
       r = { "<cmd>CopyRelPath<cr>", "CopyRelPath" },
     }
-  }, { prefix = "<leader>" })
+  }, n_leader)
+
+  local n_localleader = { mode = "n", prefix = "<localleader" }
   wk.register({ -- <localleader>
     b = {
       name = "buffers",
@@ -235,5 +242,5 @@ if ok then
       name = "Treesitter",
       i = { ":TSConfigInfo<cr>", "Info" },
     },
-  }, { prefix = "<localleader>" })
+  }, n_localleader)
 end
