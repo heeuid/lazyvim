@@ -50,23 +50,36 @@ local function change_indent(n)
   end
 end
 
-vim.api.nvim_set_keymap("c", "<c-b>", "<Left>", {})
-vim.api.nvim_set_keymap("c", "<c-f>", "<Right>", {})
-
-vim.api.nvim_set_keymap("i", "<c-h>", "<Left>", {})
-vim.api.nvim_set_keymap("i", "<c-l>", "<Right>", {})
-vim.api.nvim_set_keymap("i", "<c-a>", "<Up>", {})
-vim.api.nvim_set_keymap("i", "<c-d>", "<Down>", {})
-
 local ok, wk = pcall(require, "which-key")
 if ok then
-  -- normal mode
-  local n_ = { mode = "n", prefix = "" }
+  -- command mode
+  local c_common = { mode = "c", prefix = "" }
   wk.register({
-    U = { "<C-R>", "Redo" },
+    ["<c-b>"] = { "<Left>", "move cursor left" },
+    ["<c-f>"] = { "<Right>", "move cursor right" },
+  }, c_common)
+
+  local c_common_recursive = { mode = "c", prefix = "", noremap = false }
+  wk.register({
+    ["<F1>"] = { "<c-r>", "list registers" },
+  }, c_common_recursive)
+
+  -- insert mode
+  local i_common = { mode = "i", prefix = "" }
+  wk.register({
+    ["<c-h>"] = { "<Left>", "move cursor left" },
+    ["<c-l>"] = { "<Right>", "move cursor right" },
+    ["<c-a>"] = { "<Up>", "move cursor up" },
+    ["<c-d>"] = { "<Down>", "move cursor down" },
+  }, i_common)
+
+  -- normal mode
+  local n_common = { mode = "n", prefix = "" }
+  wk.register({
+    U = { "<c-r>", "Redo" },
     Q = { "<cmd>q<cr>", "Quit window (:q)" },
-    ["<C-Q>"] = { "<cmd>q!<cr>", "Quit window" },
-  }, n_)
+    ["<c-q>"] = { "<cmd>q!<cr>", "Quit window" },
+  }, n_common)
 
   local n_leader = { mode = "n", prefix = "<leader>" }
   wk.register({
@@ -80,7 +93,7 @@ if ok then
     }
   }, n_leader)
 
-  local n_localleader = { mode = "n", prefix = "<localleader>" }
+  local n_localleader = { mode = "n", prefix = "<localleader" }
   wk.register({ -- <localleader>
     b = {
       name = "buffers",
