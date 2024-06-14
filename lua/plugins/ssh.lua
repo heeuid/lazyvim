@@ -8,8 +8,8 @@ return {
     require("telescope").load_extension("remote-sshfs")
 
     local Util = require("lazyvim.util")
-    local telescope_find_files = Util.telescope.telescope("files", {})
-    local telescope_live_grep = Util.telescope.telescope("live_grep", {})
+    local telescope_find_files = Util.pick("files", {})
+    local telescope_live_grep = Util.pick("live_grep", {})
     local connections = require("remote-sshfs.connections")
 
     local api = require("remote-sshfs.api")
