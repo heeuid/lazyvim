@@ -1,17 +1,9 @@
-local version = vim.version()
-local current_v = { version["major"], version["minor"], version["patch"] }
-local target_v = { 0, 10, 0 }
-local enabled = false
-if vim.version.gt(current_v, target_v) or vim.version.eq(current_v, target_v) then
-  enabled = true
-end
-local nvim_lsp = require("lspconfig")
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = {
-        enabled = enabled,
+        enabled = true,-- enabled,
       },
       servers = {
         clangd = {
@@ -31,6 +23,7 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       require("inlay-hints").setup()
+      local nvim_lsp = require("lspconfig")
 
       -- lua_ls
       nvim_lsp.lua_ls.setup({
@@ -44,19 +37,19 @@ return {
       })
 
       -- clangd
-      nvim_lsp.clangd.setup({
-        settings = {
-          clangd = {
-            InlayHints = {
-              Designators = true,
-              Enabled = true,
-              ParameterNames = true,
-              DeducedTypes = true,
-            },
-            fallbackFlags = { "-std=c++20" },
-          },
-        }
-      })
+      -- nvim_lsp.clangd.setup({
+      --   settings = {
+      --     clangd = {
+      --       InlayHints = {
+      --         Designators = true,
+      --         Enabled = true,
+      --         ParameterNames = true,
+      --         DeducedTypes = true,
+      --       },
+      --       fallbackFlags = { "-std=c++20" },
+      --     },
+      --   }
+      -- })
     end
   },
 }
