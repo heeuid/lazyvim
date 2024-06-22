@@ -69,8 +69,8 @@ if ok then
   wk.register({
     ["<c-h>"] = { "<Left>", "move cursor left" },
     ["<c-l>"] = { "<Right>", "move cursor right" },
-    ["<c-a>"] = { "<Up>", "move cursor up" },
-    ["<c-d>"] = { "<Down>", "move cursor down" },
+    -- ["<c-a>"] = { "<Up>", "move cursor up" },
+    -- ["<c-d>"] = { "<Down>", "move cursor down" },
   }, i_common)
 
   -- normal mode
