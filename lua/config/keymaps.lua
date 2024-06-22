@@ -84,7 +84,7 @@ if ok then
   local n_leader = { mode = "n", prefix = "<leader>" }
   wk.register({
     a = { "<cmd>wa<cr>", "Save All(:wa)" },
-    z = { "<cmd>w<cr>", "Save(:w)" },
+    z = { "<cmd>ZenMode<cr>", "Toggle Zoom" },
     p = {
       name = "copy",
       p = { "<cmd>CopyPath<cr>", "CopyPath" },
