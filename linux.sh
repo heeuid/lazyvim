@@ -26,15 +26,16 @@ if [ "$option" = "install" ]; then
 	rm -rf ~/.config/nvim/.git ~/.config/nvim/.gitignore ~/.config/nvim/lua
 
 	# Copy my lazyvim settings
-    mkdir -p ~/.config/nvim
-    cp -r ./init.lua ./stylua.toml ./lua ~/.config/nvim
+	mkdir -p ~/.config/nvim
+	cp -r ./init.lua ./stylua.toml ./lua ~/.config/nvim
 
 	#Start Neovim!
 	nvim
 elif [ "$option" = "config" ]; then
 	# Copy my lazyvim settings
-    move_dir_to_bak "$HOME/.config/nvim"
-	cp -r ./lua ~/.config/nvim
+	move_dir_to_bak "$HOME/.config/nvim"
+	mkdir -p "$HOME/.config/nvim"
+	cp -r init.lua lua/ stylua.toml "$HOME/.config/nvim"
 elif [ "$option" = "clean" ]; then
 	rm -rf ~/.config/nvim/*
 
