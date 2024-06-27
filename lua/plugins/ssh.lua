@@ -7,6 +7,9 @@ return {
 
     require("telescope").load_extension("remote-sshfs")
 
+    -- local Util = require("lazyvim.util")
+    -- local telescope_find_files = Util.pick("files", {})
+    -- local telescope_live_grep = Util.pick("live_grep", {})
     local util_telescope = require("lazyvim.util.telescope")
     local telescope_find_files = util_telescope("files", {})
     local telescope_live_grep = util_telescope("live_grep", {})
