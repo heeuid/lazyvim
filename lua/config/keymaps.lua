@@ -92,7 +92,12 @@ if ok then
       p = { "<cmd>CopyPath<cr>", "CopyPath" },
       a = { "<cmd>CopyAbsPath<cr>", "CopyAbsPath" },
       r = { "<cmd>CopyRelPath<cr>", "CopyRelPath" },
-    }
+    },
+    l = {
+      name = "lazy",
+      l = { "<cmd>Lazy<cr>", "Lazy" },
+      g = { "<cmd>LazyGit<cr>", "LazyGit" },
+    },
   }, n_leader)
 
   local n_localleader = { mode = "n", prefix = "<localleader>" }
