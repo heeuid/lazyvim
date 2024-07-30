@@ -79,6 +79,8 @@ if ok then
     U = { "<c-r>", "Redo" },
     Q = { "<cmd>q<cr>", "Quit window (:q)" },
     ["<c-q>"] = { "<cmd>q!<cr>", "Quit window" },
+    ["<tab>"] = { "<cmd>bn<cr>", "Next buffer" },
+    ["<S-tab>"] = { "<cmd>bp<cr>", "Previous buffer" },
   }, n_common)
 
   local n_leader = { mode = "n", prefix = "<leader>" }
