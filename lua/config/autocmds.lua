@@ -28,6 +28,41 @@ for _, elem in pairs(filetype_pattern_pairs) do
 end
 
 -- Indentation
+local get_indent_and_type_from_file = function()
+  local indentation_file = vim.fs.find({ ".nvim/indentation" }, { type = 'file', upward = true })
+  if next(indentation_file) == nil then
+    return
+  end
+  local file = io.open(indentation_file[1], 'r')
+  if not file then
+    return
+  end
+
+  local content = file:read("*a")
+  file:close()
+
+  content = vim.fn.trim(content:match("[ \t\n]*[0-9]+[ \t\n]+[a-zA-Z]+[ \t\n]*"))
+  content = vim.fn.split(content)
+  local width = content[1]
+  local tab_or_space = content[2]
+  local expandable = nil
+  if type(tab_or_space) == "string" then
+    local _type = string.lower(vim.fn.trim(tab_or_space))
+    if _type == "tab" then
+      expandable = false
+    elseif _type == "space" then
+      expandable = true
+    end
+  end
+  if type(width) == "string" then
+    width = tonumber(vim.fn.trim(width))
+  else
+    width = nil
+  end
+
+  return width, expandable
+end
+
 local event_indent_pairs = {
   { { "FileType" }, { "c", "make" },   8, false },
   { { "FileType" }, { "lua", "dart", "markdown" }, 2, true },
@@ -38,6 +73,7 @@ local event_indent_pairs = {
     false,
   },
 }
+-- '.nvim/indentation' has higher priority than upper table info.
 for _, elem in pairs(event_indent_pairs) do
   local events = elem[1]
   local patterns = elem[2]
@@ -46,6 +82,13 @@ for _, elem in pairs(event_indent_pairs) do
   vim.api.nvim_create_autocmd(events, {
     pattern = patterns,
     callback = function()
+      local _tabspace, _tab_expandable = get_indent_and_type_from_file()
+      if type(_tabspace) == "number" then
+        tabspace = _tabspace
+      end
+      if type(_tab_expandable) == "boolean" then
+        tab_expandable = _tab_expandable
+      end
       vim.opt.tabstop = tabspace
       vim.opt.shiftwidth = tabspace
       vim.opt.expandtab = tab_expandable
@@ -176,3 +219,14 @@ end, {desc = "add chars to left ends for each line"})
 vim.api.nvim_create_user_command('AddCharsRightAll', function()
   add_chars('right')
 end, {desc = "add chars to right ends for each line"})
+
+vim.api.nvim_create_user_command('RefreshIndentation', function()
+  local width, expandable = get_indent_and_type_from_file()
+  if type(width) == "number" then
+    vim.opt.tabstop = width
+    vim.opt.shiftwidth = width
+  end
+  if type(expandable) == "boolean" then
+    vim.opt.expandtab = expandable
+  end
+end, { desc = "Refresh Indentation from XXX/.nvim/indentation, e.g. \'2 space\'" })

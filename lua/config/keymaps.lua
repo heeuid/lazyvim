@@ -134,6 +134,7 @@ if ok then
       { "<localleader>i2", function() change_indent(2) end, desc = "Indentation to 2" },
       { "<localleader>i4", function() change_indent(4) end, desc = "Indentation to 4" },
       { "<localleader>i8", function() change_indent(8) end, desc = "Indentation to 8" },
+      { "<localleader>ir", "<cmd>RefreshIndentation<cr>", desc = "Refresh from .nvim/indentation" },
 
       { "<localleader>l", group = "lsp" },
       { "<localleader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
