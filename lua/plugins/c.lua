@@ -40,17 +40,16 @@ return {
         callback = function()
           local ok, wk = pcall(require, "which-key")
           if ok then
-            wk.register({
-              C = {
-                name = "Clangd Extensions",
-                a = { "<cmd>ClangdAST<cr>", "[a]bstract structure" },
-                h = { "<cmd>ClangdToggleInlayHints<cr>", "toggle inlay [h]ints" },
-                m = { "<cmd>ClangdMemoryUsage<cr>", "[m]emory usage" },
-                t = { "<cmd>ClangdTypeHierarchy<cr>", "[t]ype hierarchy" },
-                s = { "<cmd>ClangdSymbolInfo<cr>", "[s]ymbol info" },
-                w = { "<cmd>ClangdSwitchSourceHeader<cr>", "s[w]itch source/header" },
-              },
-            }, { prefix = "<localleader>" })
+            wk.add({
+              mode = "n",
+              { "<localleader>C", group = "Clangd Extensions" },
+              { "<localleader>Ca", "<cmd>ClangdAST<cr>", desc = "[a]bstract structure" },
+              { "<localleader>Ch", "<cmd>ClangdToggleInlayHints<cr>", desc = "toggle inlay [h]ints" },
+              { "<localleader>Cm", "<cmd>ClangdMemoryUsage<cr>", desc = "[m]emory usage" },
+              { "<localleader>Ct", "<cmd>ClangdTypeHierarchy<cr>", desc = "[t]ype hierarchy" },
+              { "<localleader>Cs", "<cmd>ClangdSymbolInfo<cr>", desc = "[s]ymbol info" },
+              { "<localleader>Cw", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "s[w]itch source/header" },
+            })
           end
         end,
       })
