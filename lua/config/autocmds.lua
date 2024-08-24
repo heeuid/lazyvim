@@ -111,12 +111,12 @@ local add_chars = function(dir)
   local prepend_text
   local append_text
   if not dir or dir == 'left' or dir == 'both' or dir == 'one-line' then
-    prepend_text = vim.fn.input('각 라인 첫 문자 변경: ')
+    prepend_text = vim.fn.input('Left String: ')
   else
     prepend_text = ''
   end
   if not dir or dir == 'right' or dir == 'both' or dir == 'one-line' then
-    append_text = vim.fn.input('각 라인 마지막 문자 변경: ')
+    append_text = vim.fn.input('Right String: ')
   else
     append_text = ''
   end
@@ -166,21 +166,13 @@ end
 
 vim.api.nvim_create_user_command('AddCharsOne', function()
   add_chars('one-line')
-end, {})
+end, {desc = "add chars to both ends"})
 vim.api.nvim_create_user_command('AddCharsAll', function()
   add_chars()
-end, {})
+end, {desc = "add chars to both ends for each line"})
 vim.api.nvim_create_user_command('AddCharsLeftAll', function()
   add_chars('left')
-end, {})
+end, {desc = "add chars to left ends for each line"})
 vim.api.nvim_create_user_command('AddCharsRightAll', function()
   add_chars('right')
-end, {})
-
-vim.api.nvim_set_keymap('v', '<leader>ac', "<cmd>AddCharsOne<cr>", { noremap = true, desc = "add chars to both ends" })
-vim.api.nvim_set_keymap('v', '<leader>aa', "<cmd>AddCharsAll<cr>",
-  { noremap = true, desc = "add chars to both ends for each line" })
-vim.api.nvim_set_keymap('v', '<leader>ah', "<cmd>AddCharsLeftAll<cr>",
-  { noremap = true, desc = "add chars to left end for each line" })
-vim.api.nvim_set_keymap('v', '<leader>al', "<cmd>AddCharsRightAll<cr>",
-  { noremap = true, desc = "addr chars to right end for each line" })
+end, {desc = "add chars to right ends for each line"})
