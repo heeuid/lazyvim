@@ -44,6 +44,7 @@ local function change_indent(n)
   end
 end
 
+local lazyvim_util = require'lazyvim.util'
 local ok, wk = pcall(require, "which-key")
 if ok then
   wk.add({
@@ -78,15 +79,20 @@ if ok then
 
       { "<leader>a","<cmd>wa<cr>", desc = "Save All(:wa)" },
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zoom" },
+      { "<leader>h", "<c-w>h", desc = "Goto left window" },
+      { "<leader>j", "<c-w>j", desc = "Goto below window" },
+      { "<leader>k", "<c-w>k", desc = "Goto above window" },
+      { "<leader>l", "<c-w>l", desc = "Goto right window" },
 
       { "<leader>p", group = "copy" },
       { "<leader>pp", "<cmd>CopyPath<cr>", desc = "CopyPath" },
       { "<leader>pa", "<cmd>CopyAbsPath<cr>", desc = "CopyAbsPath" },
       { "<leader>pr", "<cmd>CopyRelPath<cr>", desc = "CopyRelPath" },
 
-      { "<leader>l", group = "lazy" },
-      { "<leader>ll", "<cmd>Lazy<cr>", desc = "Lazy" },
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      { "<leader>L", group = "lazy" },
+      { "<leader>Ll", "<cmd>Lazy<cr>", desc = "Lazy" },
+      { "<leader>Lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      { "<leader>Lc", function() lazyvim_util.news.changelog() end, desc = "LazyVim Changelog" },
 
       { "<localleader>b", group = "buffers" },
       { "<localleader>bj", "<cmd>BufferLinePick<cr>", desc = "Jump" },
