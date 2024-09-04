@@ -70,6 +70,11 @@ if ok then
       { "<leader>al", "<cmd>AddCharsRightAll<cr>", desc = "add chars to right end for each line", noremap = true },
     },
     {
+      mode = "nv", -- normal & visual mode
+      { "gh", "^", desc = "Go to the front of the line" },
+      { "gl", "$", desc = "Go to the back of the line" },
+    },
+    {
       mode = "n", -- normal mode
       { "U", "<c-r>", desc = "Redo" },
       { "Q", "<cmd>q<cr>", desc = "Quit window (:q)" },
