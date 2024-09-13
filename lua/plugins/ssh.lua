@@ -18,7 +18,7 @@ return {
     local api = require("remote-sshfs.api")
     local ok, wk = pcall(require, "which-key")
 
-    local find_files = function()
+    local find_file = function()
       if connections.is_connected() then
         api.find_files({})
       else
@@ -36,26 +36,36 @@ return {
       end
     end
 
+    local connect = function()
+      local cmd = vim.fn.input("<user>@<hostname>:<path>")
+      if cmd ~= "" then
+        local host = require'remote-sshfs.utils'.parse_host_from_command(cmd)
+        require'remote-sshfs.connections'.connect(host)
+      else
+        api.connect({})
+      end
+    end
+
     local is_connected = function() print(connections.is_connected()) end
 
     if not ok then
-      vim.keymap.set("n", "<leader>rc", api.connect, { desc = "Remote SSHFS connect" })
+      vim.keymap.set("n", "<leader>rc", connect, { desc = "Remote SSHFS connect" })
       vim.keymap.set("n", "<leader>rd", api.disconnect, { desc = "Remote SSHFS disconnect" })
       vim.keymap.set("n", "<leader>re", api.edit, { desc = "Remote SSHFS edit" })
       vim.keymap.set("n", "<leader>r?", is_connected, { desc = "Remote SSHFS check connection" })
-      vim.keymap.set("n", "<leader>ff", find_files, { desc = "Find Files (root dir)" })
+      vim.keymap.set("n", "<leader>ff", find_file, { desc = "Find Files (root dir)" })
       vim.keymap.set("n", "<leader>fg", live_grep, { desc = "Grep (root dir)" })
     else
       wk.add({
         mode = "n",
 
         { "<leader>r",  group = "remote ssh" },
-        { "<leader>rc", api.connect, desc = "Remote SSHFS connect" },
+        { "<leader>rc", connect, desc = "Remote SSHFS connect" },
         { "<leader>rd", api.disconnect, desc = "Remote SSHFS disconnect" },
         { "<leader>re", api.edit, desc = "SSH config edit" },
         { "<leader>r?", is_connected, desc = "Remote SSHFS check connection" },
 
-        { "<leader>ff", find_files, desc = "Find Files (root dir)" },
+        { "<leader>ff", find_file, desc = "Find Files (root dir)" },
         { "<leader>fg", live_grep, desc = "Grep (root dir)" }
       })
     end
