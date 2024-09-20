@@ -1,14 +1,6 @@
 return {
   {
-    'dstein64/nvim-scrollview',
-    config = function()
-      require('scrollview').setup({
-        current_only = true,
-        base = 'right',
-        signs_on_startup = { 'all' },
-        diagnostics_severities = { vim.diagnostic.severity.ERROR }
-      })
-    end
+    'lewis6991/satellite.nvim',
   },
   {
     'gorbit99/codewindow.nvim',
