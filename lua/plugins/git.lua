@@ -23,7 +23,11 @@ function open_gitui_floating()
   -- opn floating window
   local win = vim.api.nvim_open_win(buf, true, opts)
 
-  vim.fn.termopen("gitui")
+  vim.fn.termopen("gitui", {
+    on_exit = function()
+      vim.api.nvim_buf_delete(buf, {force = true})
+    end
+  })
 
   -- terminal mode
   vim.cmd("startinsert")
