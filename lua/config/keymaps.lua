@@ -126,7 +126,7 @@ if ok then
       { "<localleader>cb", "<cmd>Cscope build<cr>", desc = cscope_sym_map.b },
 
       { "<localleader>g", group = "git" },
-      { "<localleader>gg", "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", desc = "Lazygit" },
+      { "<localleader>gg", "<cmd>LazyGit<cr>", desc = "Lazygit" },
       { "<localleader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
       { "<localleader>gk", "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
       { "<localleader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Git Blame(Who Changed)" },
