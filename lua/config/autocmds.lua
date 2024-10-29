@@ -117,6 +117,40 @@ vim.cmd([[autocmd BufEnter * checktime]])
 --   end
 -- })
 --
+
+-- run .nvim/*.lua
+vim.fn.find_nvim_dir_upward = function(cwd)
+    local current_dir = cwd
+    while current_dir ~= "/" do
+        local nvim_path = current_dir .. "/.nvim"
+        if vim.fn.isdirectory(nvim_path) == 1 then
+            return nvim_path
+        end
+        current_dir = vim.fn.fnamemodify(current_dir, ":h")
+    end
+    return nil
+end
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    local lua_dir = vim.fn.find_nvim_dir_upward(vim.fn.getcwd())
+
+    if not lua_dir then
+      return
+    end
+
+    local lua_file = vim.fs.find(function(name, _)
+      return name:match('.*%.lua')
+    end, { type = 'file', limit = math.huge, path = lua_dir })
+
+    for _, file in pairs(lua_file) do
+      dofile(file)
+    end
+
+    vim.notify('run ' .. vim.inspect(lua_file))
+  end
+})
+
+-- run usercmds.lua and configs.lua
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     require('config.usercmds')
