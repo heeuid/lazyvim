@@ -1,5 +1,40 @@
 -- run script after autocmds.lua
 
+vim.api.nvim_create_user_command('OpenGitui', function()
+  local width = vim.api.nvim_win_get_width(0)
+  local height = vim.api.nvim_win_get_height(0)
+
+  local win_height = math.ceil(height * 0.8)
+  local win_width = math.ceil(width * 0.9)
+  local row = math.ceil((height - win_height) / 2)
+  local col = math.ceil((width - win_width) / 2)
+
+  local opts = {
+    relative = "editor",
+    width = win_width,
+    height = win_height,
+    row = row,
+    col = col,
+    style = "minimal",
+    border = "rounded"
+  }
+
+  -- new buffer for new window
+  local buf = vim.api.nvim_create_buf(false, true)
+
+  -- open floating window
+  local _ = vim.api.nvim_open_win(buf, true, opts)
+
+  vim.fn.termopen("gitui", {
+    on_exit = function()
+      vim.api.nvim_buf_delete(buf, {force = true})
+    end
+  })
+
+  -- terminal mode
+  vim.cmd("startinsert")
+end, { desc = 'open `gitui`' })
+
 vim.api.nvim_create_user_command('CopyAbsPath', function()
   local path = vim.fn.expand("%:p")
   vim.fn.setreg("+", path)
