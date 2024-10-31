@@ -44,10 +44,21 @@ vim.api.nvim_create_user_command('Gitui', function()
   -- open floating window
   local _ = vim.api.nvim_open_win(buf, true, opts)
 
+  local debug = function(_, data, event)
+    if data then
+      local msg = event .. "!\n" .. vim.inspect(data)
+      vim.notify(msg)
+    end
+  end
+
   vim.fn.termopen("gitui", {
     on_exit = function()
       vim.api.nvim_buf_delete(buf, {force = true})
-    end
+    end,
+    on_stderr = debug,
+    on_stdout = debug,
+    stderr_buffered = true,
+    stdout_buffered = true,
   })
 
   -- terminal mode
