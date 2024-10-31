@@ -1,5 +1,18 @@
 -- run script after autocmds.lua
 
+vim.api.nvim_create_user_command('ToggleDiagnosticVText', function()
+  local opts = vim.diagnostic.config()
+  if opts then
+    vim.diagnostic.config({ virtual_text = not opts.virtual_text })
+  end
+end, {desc = 'toggle virtual text of diagnostic'})
+
+vim.api.nvim_create_user_command('ToggleDiagnostic', function()
+  local enabled = vim.diagnostic.is_enabled()
+  vim.diagnostic.enable(not enabled)
+  vim.diagnostic.config({ virtual_text = true })
+end, {desc = 'toggle diagnostic'})
+
 vim.api.nvim_create_user_command('InlayHintsToggle', function()
   local enabled = vim.lsp.inlay_hint.is_enabled()
   vim.lsp.inlay_hint.enable(not enabled)
