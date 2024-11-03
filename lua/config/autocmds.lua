@@ -150,6 +150,17 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end
 })
 
+-- enable inlay-hint of lua lsp server
+local lspconfig = require'lspconfig'
+vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*.lua",
+  callback = function()
+    lspconfig.lua_ls.manager.config.settings.Lua.hint = {
+      enable = true
+    }
+  end
+})
+
 -- run usercmds.lua and configs.lua
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
