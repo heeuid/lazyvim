@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command('InlayHintsToggle', function()
   vim.notify('inlay hints: ' .. vim.inspect(not enabled))
 end, {desc = "toggle inlay hints"})
 
-vim.api.nvim_create_user_command('OpenGitui', function()
+vim.api.nvim_create_user_command('Gitui', function()
   local width = vim.api.nvim_win_get_width(0)
   local height = vim.api.nvim_win_get_height(0)
 
