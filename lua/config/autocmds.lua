@@ -161,24 +161,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
--- control scrollview column
-local ok = pcall(require, 'scrollview')
-if ok then
-  vim.api.nvim_create_autocmd({"WinEnter", "WinResized"}, {
-    callback = function()
-      local win_width = vim.api.nvim_win_get_width(0) -- window size
-      local sign_column_width = 3 -- empty line btw line-num and contents
-      local content_width = win_width - sign_column_width
-      if vim.wo.number or vim.wo.relativenumber then
-        local max_line_number = vim.api.nvim_buf_line_count(0) -- current buffer maximum line-num
-        local number_column_width = math.max(4, #tostring(max_line_number)) -- size of string of line-num
-        content_width = content_width - number_column_width
-      end
-      vim.g.scrollview_column = content_width
-    end
-  })
-end
-
 -- run usercmds.lua and configs.lua
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
