@@ -64,7 +64,7 @@ vim.fn.get_indent_and_type_from_file = function()
 end
 
 local event_indent_pairs = {
-  { { "FileType" }, { "c", "make" },   8, false },
+  { { "FileType" }, { "c", "make" },               8, false },
   { { "FileType" }, { "lua", "dart", "markdown" }, 2, true },
   {
     { "BufRead", "BufNewFile" },
@@ -120,15 +120,15 @@ vim.cmd([[autocmd BufEnter * checktime]])
 
 -- run .nvim/*.lua
 vim.fn.find_nvim_dir_upward = function(cwd)
-    local current_dir = cwd
-    while current_dir ~= "/" do
-        local nvim_path = current_dir .. "/.nvim"
-        if vim.fn.isdirectory(nvim_path) == 1 then
-            return nvim_path
-        end
-        current_dir = vim.fn.fnamemodify(current_dir, ":h")
+  local current_dir = cwd
+  while current_dir ~= "/" do
+    local nvim_path = current_dir .. "/.nvim"
+    if vim.fn.isdirectory(nvim_path) == 1 then
+      return nvim_path
     end
-    return nil
+    current_dir = vim.fn.fnamemodify(current_dir, ":h")
+  end
+  return nil
 end
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
@@ -158,7 +158,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 -- enable inlay-hint of lua lsp server
-local lspconfig = require'lspconfig'
+local lspconfig = require 'lspconfig'
 vim.api.nvim_create_autocmd("LspAttach", {
   pattern = "*.lua",
   callback = function()
@@ -168,7 +168,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
--- run usercmds.lua and configs.lua
+---- run usercmds.lua and configs.lua
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     require('config.usercmds')
