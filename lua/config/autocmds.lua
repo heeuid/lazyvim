@@ -138,15 +138,22 @@ vim.api.nvim_create_autocmd('VimEnter', {
       return
     end
 
-    local lua_file = vim.fs.find(function(name, _)
-      return name:match('.*%.lua')
-    end, { type = 'file', limit = math.huge, path = lua_dir })
-
-    for _, file in pairs(lua_file) do
-      dofile(file)
+    local local_init_file = lua_dir .. "/init.lua"
+    if vim.fn.filereadable(local_init_file) == 1 and pcall(dofile, local_init_file) then
+      vim.notify('run ' .. vim.inspect(local_init_file))
     end
 
-    vim.notify('run ' .. vim.inspect(lua_file))
+    -- local lua_files = vim.fs.find(function(name, _)
+    --   return name:match('.*%.lua')
+    -- end, { type = 'file', limit = math.huge, path = lua_dir })
+    --
+    -- for _, file in pairs(lua_files) do
+    --   if pcall(dofile, file) then
+    --     dofile(file)
+    --   end
+    -- end
+
+    -- vim.notify('run ' .. vim.inspect(lua_files))
   end
 })
 
