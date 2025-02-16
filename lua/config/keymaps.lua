@@ -62,14 +62,6 @@ if ok then
       -- { "<c-d>", "<Down>", "move cursor down" },
     },
     {
-      mode = "v", -- visual mode
-      { "<leader>a", group = "append str" },
-      { "<leader>ac", "<cmd>AddCharsOne<cr>", desc = "add chars to both ends", noremap = true },
-      { "<leader>aa", "<cmd>AddCharsAll<cr>", desc = "add chars to both ends for each line", noremap = true },
-      { "<leader>ah", "<cmd>AddCharsLeftAll<cr>", desc = "add chars to left end for each line", noremap = true },
-      { "<leader>al", "<cmd>AddCharsRightAll<cr>", desc = "add chars to right end for each line", noremap = true },
-    },
-    {
       mode = "nv", -- normal & visual mode
       { "gh", "^", desc = "Go to the front of the line" },
       { "gl", "$", desc = "Go to the back of the line" },
