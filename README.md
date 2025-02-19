@@ -5,8 +5,7 @@ This is my lazyvim settings.
 # Neovim
 git clone https://github.com/neovim/neovim
 cd neovim
-make CMAKE_INSTALL_PREFIX=$HOME/.local install
-make CMAKE_BUILD_TYPE=Release
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local install
 cd -
 
 # Pyenv / python / pip
