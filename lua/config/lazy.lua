@@ -20,6 +20,9 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.lang.cmake" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- 'snacks_explorer' not working on Windows (neovim stops during opening)
+    -- Uncomment below 'import' line to use neo-tree instead of snacks_explorer on Windows
+    -- { import = "lazyvim.plugins.extras.extras.neo-tree" },
     -- import/override with your plugins
     { import = "plugins" },
   },
