@@ -65,6 +65,8 @@ if ok then
       mode = "nv", -- normal & visual mode
       { "gh", "^", desc = "Go to the front of the line" },
       { "gl", "$", desc = "Go to the back of the line" },
+      { "<leader>y", "\"+y", desc = "Yank to system register" },
+      { "<leader>p", "\"+p", desc = "Paste to system register" },
     },
     {
       mode = "n", -- normal mode

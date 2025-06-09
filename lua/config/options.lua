@@ -9,6 +9,7 @@ vim.opt.swapfile = false
 vim.opt.autoread = true
 vim.opt.undofile = true
 vim.opt.colorcolumn = "80"
+vim.opt.clipboard = ""
 
 vim.g.autoformat = false
 vim.g.lazyvim_python_lsp = "basedpyright"
