@@ -50,16 +50,16 @@ if ok then
   wk.add({
     {
       mode = "c", -- command mode
+      { "<c-a>", "<Home>", desc = "move cursor ahead"  },
       { "<c-b>", "<Left>", desc = "move cursor left"  },
       { "<c-f>", "<Right>", desc = "move cursor right"  },
-      { "<F1>", "<c-r>", desc = "list registers", remap = true },
+      { "<c-e>", "<End>", desc = "move cursor end"  },
+      -- { "<F1>", "<c-r>", desc = "list registers", remap = true },
     },
     {
       mode = "i", -- insert mode
       { "<c-h>", "<Left>", desc = "move cursor left" },
       { "<c-l>", "<Right>", desc = "move cursor right" },
-      -- { "<c-a>", "<Up>", "move cursor up", mode = "" },
-      -- { "<c-d>", "<Down>", "move cursor down" },
     },
     {
       mode = "nv", -- normal & visual mode
