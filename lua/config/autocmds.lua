@@ -6,7 +6,7 @@
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
     vim.api.nvim_set_hl(0, "LspInlayHint", {
-      fg = "#406060"
+      fg = "#a0b0b0"
     })
   end,
 })
@@ -103,70 +103,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.cmd([[autocmd BufEnter * checktime]])
-
--- to solve tab error for insert mode s.t. jump to somewhere
--- vim.api.nvim_create_autocmd("ModeChanged", {
---   callback = function()
---     -- stop snippets when you leave to normal mode
---     if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
---         and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
---         and not require('luasnip').session.jump_active
---     then
---       require('luasnip').unlink_current()
---     end
---   end
--- })
---
-
--- run .nvim/*.lua
-vim.fn.find_nvim_dir_upward = function(cwd)
-  local current_dir = cwd
-  while current_dir ~= "/" do
-    local nvim_path = current_dir .. "/.nvim"
-    if vim.fn.isdirectory(nvim_path) == 1 then
-      return nvim_path
-    end
-    current_dir = vim.fn.fnamemodify(current_dir, ":h")
-  end
-  return nil
-end
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    local lua_dir = vim.fn.find_nvim_dir_upward(vim.fn.getcwd())
-
-    if not lua_dir then
-      return
-    end
-
-    local local_init_file = lua_dir .. "/init.lua"
-    if vim.fn.filereadable(local_init_file) == 1 and pcall(dofile, local_init_file) then
-      vim.notify('run ' .. vim.inspect(local_init_file))
-    end
-
-    -- local lua_files = vim.fs.find(function(name, _)
-    --   return name:match('.*%.lua')
-    -- end, { type = 'file', limit = math.huge, path = lua_dir })
-    --
-    -- for _, file in pairs(lua_files) do
-    --   if pcall(dofile, file) then
-    --     dofile(file)
-    --   end
-    -- end
-
-    -- vim.notify('run ' .. vim.inspect(lua_files))
-  end
-})
-
--- enable inlay-hint of lua lsp server
-local lspconfig = require 'lspconfig'
-vim.api.nvim_create_autocmd("LspAttach", {
-  pattern = "*.lua",
-  callback = function()
-    lspconfig.lua_ls.manager.config.settings.Lua.hint = {
-      enable = true
-    }
-  end
-})
 
 ---- run usercmds.lua and configs.lua
 vim.api.nvim_create_autocmd("VimEnter", {

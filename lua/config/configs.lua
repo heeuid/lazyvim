@@ -6,3 +6,7 @@ if ok then
     vim.g.snacks_animate = false
   end
 end
+
+-- "debug" for debugging
+vim.lsp.set_log_level("off")
+vim.g.clipboard = "osc52"

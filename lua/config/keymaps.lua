@@ -76,17 +76,12 @@ if ok then
       { "<tab>", "<cmd>bn<cr>", desc = "Next buffer" },
       { "<S-tab>", "<cmd>bp<cr>", desc = "Previous buffer" },
 
-      { "<leader>a","<cmd>wa<cr>", desc = "Save All(:wa)" },
+      -- { "<leader>a","<cmd>wa<cr>", desc = "Save All(:wa)" },
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zoom" },
       { "<leader>h", "<c-w>h", desc = "Goto left window" },
       { "<leader>j", "<c-w>j", desc = "Goto below window" },
       { "<leader>k", "<c-w>k", desc = "Goto above window" },
       { "<leader>l", "<c-w>l", desc = "Goto right window" },
-
-      { "<leader>p", group = "copy" },
-      { "<leader>pp", "<cmd>CopyPath<cr>", desc = "CopyPath" },
-      { "<leader>pa", "<cmd>CopyAbsPath<cr>", desc = "CopyAbsPath" },
-      { "<leader>pr", "<cmd>CopyRelPath<cr>", desc = "CopyRelPath" },
 
       { "<leader>L", group = "lazy" },
       { "<leader>Ll", "<cmd>Lazy<cr>", desc = "Lazy" },

@@ -25,7 +25,7 @@ return {
     dependencies = {
       "projekt0n/github-nvim-theme",
     },
-    opts = { colorscheme = "catppuccin-mocha" },
+    opts = { colorscheme = "catppuccin-latte" },
     -- opts = { colorscheme = "github_dark" },
     -- opts = { colorscheme = "tokyonight-night" },
   },

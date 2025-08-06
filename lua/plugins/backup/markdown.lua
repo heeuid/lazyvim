@@ -1,0 +1,24 @@
+return {
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   ft = { "markdown" },
+  --   config = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  -- },
+  -- {
+  --   "MeanderingProgrammer/render-markdown.nvim",     -- Enhanced markdown rendering
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-tree/nvim-web-devicons",
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   ft = { "markdown", "codecompanion" },
+  --   opts = {
+  --     render_modes = true, -- Render in ALL modes
+  --     sign = {
+  --       enabled = false,   -- Turn off in the status column
+  --     },
+  --   },
+  -- },
+}
