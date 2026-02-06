@@ -128,7 +128,7 @@ if ok then
       { "<localleader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git Checkout Branch" },
       { "<localleader>gc", "<cmd>Telescope git_commits<cr>", desc = "Git Checkout Commit" },
       { "<localleader>gC", "<cmd>Telescope git_bcommits<cr>", desc = "Git Checkout commit(for current file)" },
-      { "<localleader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff" },
+      { "<localleader>gd", "<cmd>GitDiffCommits<cr>", desc = "Git Diff (select commits)" },
 
       { "<localleader>i", group = "indentation" },
       { "<localleader>i2", function() change_indent(2) end, desc = "Indentation to 2" },
