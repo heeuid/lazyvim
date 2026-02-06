@@ -114,6 +114,8 @@ if ok then
       { "<localleader>ca", get_cscope_prompt_cmd("a", "w"), desc = cscope_sym_map.a },
       { "<localleader>cb", "<cmd>Cscope build<cr>", desc = cscope_sym_map.b },
 
+      { "<localleader>f", "<cmd>FzfLua<cr>", desc = "fzf search" },
+
       { "<localleader>g", group = "git" },
       { "<localleader>gg", "<cmd>LazyGit<cr>", desc = "Lazygit" },
       { "<localleader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
