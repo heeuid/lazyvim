@@ -73,8 +73,8 @@ if ok then
       { "U", "<c-r>", desc = "Redo" },
       { "Q", "<cmd>q<cr>", desc = "Quit window (:q)" },
       { "<c-q>", "<cmd>q!<cr>", desc = "Quit window" },
-      { "<tab>", "<cmd>bn<cr>", desc = "Next buffer" },
-      { "<S-tab>", "<cmd>bp<cr>", desc = "Previous buffer" },
+      { "<tab>", "gt", desc = "Next tab" },
+      { "<S-tab>", "gT", desc = "Previous tab" },
 
       -- { "<leader>a","<cmd>wa<cr>", desc = "Save All(:wa)" },
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "Toggle Zoom" },
