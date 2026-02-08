@@ -11,6 +11,28 @@ vim.api.nvim_create_user_command('RefreshIndentation', function()
   end
 end, { desc = "Refresh Indentation from XXX/.nvim/indentation, e.g. \'2 space\'" })
 
+vim.api.nvim_create_user_command('TN', function(opts)
+  local nargs = #opts.fargs
+  if nargs == 0 then
+    vim.cmd("tab split")
+  else
+    vim.cmd("tabedit " .. opts.fargs[1])
+  end
+end, { nargs = "?", complete = "file" })
+
+vim.api.nvim_create_user_command('TC', function(opts)
+  local nargs = #opts.fargs
+  if nargs == 0 then
+    vim.cmd("tabclose")
+  else
+    local args = opts.fargs
+    table.sort(args, function(a, b) return a > b end)
+    for _, tab in ipairs(args) do
+      vim.cmd("tabclose " .. tab)
+    end
+  end
+end, { nargs = "*" })
+
 vim.api.nvim_create_user_command('GitDiffCommits', function()
   local ok, _ = pcall(require, 'codediff')
   if not ok then
