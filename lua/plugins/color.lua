@@ -16,16 +16,14 @@ return {
     end,
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-  },
-  {
     "LazyVim/LazyVim",
     dependencies = {
-      "projekt0n/github-nvim-theme",
+      "navarasu/onedark.nvim",
+      -- "catppuccin/nvim",
+      -- "projekt0n/github-nvim-theme",
     },
-    opts = { colorscheme = "catppuccin-latte" },
+    opts = { colorscheme = "onedark-light" },
+    -- opts = { colorscheme = "catppuccin-latte" },
     -- opts = { colorscheme = "github_dark" },
     -- opts = { colorscheme = "tokyonight-night" },
   },
