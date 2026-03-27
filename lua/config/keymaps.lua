@@ -91,10 +91,11 @@ if ok then
       { "<c-up>", "<c-w>k", desc = "Goto above window" },
       { "<c-right>", "<c-w>l", desc = "Goto right window" },
 
-      { "<c-s-left>", "<Cmd>vertical resize -2<CR>", desc = "Decrease Window Width" },
-      { "<c-s-down>", "<Cmd>resize -2<CR>", desc = "Decrease Window Height" },
-      { "<c-s-up>", "<Cmd>resize +2<CR>", desc = "Increase Window Height" },
-      { "<c-s-right>", "<Cmd>vertical resize +2<CR>", desc = "Increase Window Width" },
+      -- Windows resize +/- based on right/down line; resize+/- == push/pull
+      { "<c-s-left>", "<Cmd>vertical resize -2<CR>", desc = "Pull window's right edge to the left" },
+      { "<c-s-down>", "<Cmd>resize +2<CR>", desc = "Push window's right edge to the right" },
+      { "<c-s-up>", "<Cmd>resize -2<CR>", desc = "Pull window's bottom edge up" },
+      { "<c-s-right>", "<Cmd>vertical resize +2<CR>", desc = "Push window's bottom edge down" },
 
       { "<leader>L", group = "lazy" },
       { "<leader>Ll", "<cmd>Lazy<cr>", desc = "Lazy" },
