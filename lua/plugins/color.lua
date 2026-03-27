@@ -22,7 +22,7 @@ return {
       -- "catppuccin/nvim",
       -- "projekt0n/github-nvim-theme",
     },
-    opts = { colorscheme = "onedark-light" },
+    opts = { colorscheme = "onedark" },
     -- opts = { colorscheme = "catppuccin-latte" },
     -- opts = { colorscheme = "github_dark" },
     -- opts = { colorscheme = "tokyonight-night" },
