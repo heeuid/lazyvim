@@ -33,6 +33,37 @@ vim.api.nvim_create_user_command('TC', function(opts)
   end
 end, { nargs = "*" })
 
+vim.api.nvim_create_user_command("Snacks", function(opts)
+  local snacks = require("snacks")
+  local cmd = opts.args
+
+  -- 1. 인자가 없으면 picker 목록(pickers)을 실행
+  if cmd == "" then
+    snacks.picker.pickers()
+    return
+  end
+
+  -- 2. <CMD>가 snacks.picker 내에 존재하고 함수라면 실행
+  if snacks.picker[cmd] and type(snacks.picker[cmd]) == "function" then
+    snacks.picker[cmd]()
+  else
+    vim.notify("Snacks.picker에 '" .. cmd .. "' 기능이 없습니다.", vim.log.levels.ERROR)
+  end
+end, {
+  nargs = "?", -- 인자를 선택적으로 받을 수 있음
+  -- 자동완성 기능 (Tab 키로 목록 확인 가능)
+  complete = function(ArgLead, CmdLine, CursorPos)
+    local keys = {}
+    for k, v in pairs(require("snacks").picker) do
+      if type(v) == "function" and not k:find("^_") then -- 내부 함수(_) 제외
+        table.insert(keys, k)
+      end
+    end
+    table.sort(keys)
+    return keys
+  end
+})
+
 vim.api.nvim_create_user_command('GitDiffCommits', function()
   local ok, _ = pcall(require, 'codediff')
   if not ok then
