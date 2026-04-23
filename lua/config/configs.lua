@@ -18,12 +18,12 @@ if ok then
     settings = {
       Lua = {
         hint = {
-          arrayIndex = true,
           enable = true,
-          paramName = true,
-          paramType = true,
-          semicolon = true,
+          arrayIndex = "Enable",
           setType = true,
+          paramName = "All",
+          paramType = true,
+          await = true,
         }
       }
     }
