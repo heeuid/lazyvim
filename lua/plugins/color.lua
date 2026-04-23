@@ -1,9 +1,9 @@
 return {
-  {
+  { -- color of cursor's line number changes based on the mode
     "mawkler/modicator.nvim",
     config = function() require('modicator').setup() end,
   },
-  {
+  { -- show the color of '#000000'
     "NvChad/nvim-colorizer.lua",
     lazy = true,
     config = function()
@@ -15,7 +15,7 @@ return {
       })
     end,
   },
-  {
+  { -- theme
     "LazyVim/LazyVim",
     dependencies = {
       "navarasu/onedark.nvim",
