@@ -82,6 +82,8 @@ if ok then
       { "<leader>j", "<c-w>j", desc = "Goto below window" },
       { "<leader>k", "<c-w>k", desc = "Goto above window" },
       { "<leader>l", "<c-w>l", desc = "Goto right window" },
+      { "<leader>t", "<c-t>", desc = "Go back in tag stack (<c-t>)" },
+      { "<leader>T", "<cmd>tag<cr>", desc = "Go forward in tag stack (:tag)" },
       { "<c-h>", "<c-w>h", desc = "Goto left window" },
       { "<c-j>", "<c-w>j", desc = "Goto below window" },
       { "<c-k>", "<c-w>k", desc = "Goto above window" },
