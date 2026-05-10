@@ -159,7 +159,7 @@ if ok then
       { "<localleader>ld", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", desc = "Buffer Diagnostics" },
       { "<localleader>lW", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
       { "<localleader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", desc = "Format" },
-      { "<localleader>li", "<cmd>LspInfo<cr>", desc = "Info" },
+      { "<localleader>li", "<cmd>checkhealth vim.lsp<cr>", desc = "Lsp Info" },
       { "<localleader>lI", "<cmd>Mason<cr>", desc = "Mason Info" },
       { "<localleader>ln", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
       { "<localleader>lp", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
